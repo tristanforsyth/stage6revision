@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HSC Millionaire | Society & Culture Revision</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.m-wrap{max-width:1000px;margin:0 auto;padding:20px}
+.m-head{text-align:center}
+.mode{text-align:center;font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+.gamegrid{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:20px;align-items:start}
+.gamecard{background:#15296d;color:#fff;border-radius:20px;padding:28px;min-height:500px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.status{text-align:center;color:#ffd84d;font-weight:800;margin-bottom:18px}
+.question{font-size:1.35rem;line-height:1.45;background:#0d1e55;border:2px solid #6d7fc4;border-radius:18px;padding:22px;margin:20px 0}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.answerbtn{background:#102d82;color:white;border:2px solid #7589d6;border-radius:999px;padding:15px;text-align:left;font-size:1rem;cursor:pointer}
+.answerbtn:hover:not(:disabled){background:#1b47ad}
+.answerbtn:disabled{cursor:default;opacity:.7}
+.answerbtn.removed{visibility:hidden}
+.lifelines{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px 0}
+.lifelines button.used{opacity:.35;text-decoration:line-through}
+.feedback{background:#fff;color:#111;border-radius:14px;padding:16px;margin-top:18px;display:none}
+.ladder{background:#fff;border:1px solid #ddd;border-radius:16px;padding:14px}
+.rung{display:flex;justify-content:space-between;padding:5px 8px;border-radius:7px;font-size:.9rem}
+.rung.current{background:#172f78;color:#fff;font-weight:800}
+.rung.safe{font-weight:800}
+.source{font-size:.84rem;opacity:.78}
+@media(max-width:760px){.gamegrid{grid-template-columns:1fr}.answers{grid-template-columns:1fr}.ladder{order:-1}}
+</style>
+</head>
+<body>
+<header class="topbar">
+<div class="wrap nav">
+<a href="index.html" class="brand">HSC Society & Culture</a>
+<nav><a href="games.html">Games</a><a href="multiple-choice.html">Multiple Choice</a><a href="past-questions.html">Past HSC Questions</a></nav>
+</div>
+</header>
+
+<main class="m-wrap">
+<div class="mode">INDIVIDUAL GAME</div>
+<h1 class="m-head">Who Wants to Be an HSC Millionaire?</h1>
+<p style="text-align:center">Climb the 15-question ladder using questions adapted from official NESA HSC Society & Culture papers.</p>
+
+<div class="gamegrid">
+<section class="gamecard">
+<div class="status" id="status">Loading HSC question bank…</div>
+<div class="lifelines">
+<button id="fifty" onclick="useFifty()">50 / 50</button>
+<button id="classLife" onclick="askClass()">Ask the Class</button>
+<button id="forsythLife" onclick="askForsyth()">Ask Mr Forsyth</button>
+</div>
+<div class="question" id="question">Loading…</div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+</section>
+<aside class="ladder" id="ladder"></aside>
+</div>
+</main>
+
+<script>
+const money=["$100","$200","$300","$500","$1,000","$2,000","$4,000","$8,000","$16,000","$32,000","$64,000","$125,000","$250,000","$500,000","$1,000,000"];
+let bank=[],queue=[],level=0,current=null,locked=false;
+let used={fifty:false,classLife:false,forsythLife:false};
+
+fetch('data/questions.json').then(r=>r.json()).then(d=>{
+ bank=d;
+ startGame();
+});
+
+function shuffle(a){
+ a=[...a];
+ for(let i=a.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+
+function buildRun(){
+ let usedQ=new Set(), run=[];
+ for(let i=0;i<15;i++){
+   let target = i<4 ? 2 : i<10 ? 3 : 4;
+   if(i>=13) target=5;
+   let pool=shuffle(bank.filter(q=>!usedQ.has(q.q)));
+   pool.sort((a,b)=>Math.abs((a.level||3)-target)-Math.abs((b.level||3)-target));
+   let q=pool[0];
+   run.push(q); usedQ.add(q.q);
+ }
+ return run;
+}
+
+function startGame(){
+ queue=buildRun();
+ level=0; locked=false;
+ used={fifty:false,classLife:false,forsythLife:false};
+ ['fifty','classLife','forsythLife'].forEach(id=>document.getElementById(id).classList.remove('used'));
+ renderLadder();
+ showQuestion();
+}
+
+function renderLadder(){
+ let el=document.getElementById('ladder'); el.innerHTML='';
+ for(let i=14;i>=0;i--){
+   let d=document.createElement('div');
+   d.className='rung'+(i===level?' current':'')+([4,9].includes(i)?' safe':'');
+   d.innerHTML='<span>'+(i+1)+'</span><span>'+money[i]+([4,9].includes(i)?' ✓':'')+'</span>';
+   el.appendChild(d);
+ }
+}
+
+function showQuestion(){
+ locked=false; current=queue[level];
+ document.getElementById('status').textContent='Question '+(level+1)+' of 15 — '+money[level];
+ document.getElementById('question').textContent=current.q;
+ let a=document.getElementById('answers'); a.innerHTML='';
+ current.o.forEach((x,i)=>{
+   let b=document.createElement('button');
+   b.className='answerbtn'; b.dataset.index=i;
+   b.innerHTML='<b>'+String.fromCharCode(65+i)+':</b> '+x;
+   b.onclick=()=>choose(i);
+   a.appendChild(b);
+ });
+ document.getElementById('feedback').style.display='none';
+ renderLadder();
+}
+
+function choose(i){
+ if(locked) return;
+ locked=true;
+ document.querySelectorAll('.answerbtn').forEach(b=>b.disabled=true);
+ let ok=i===current.a;
+ let f=document.getElementById('feedback');
+ f.style.display='block';
+ if(ok){
+   if(level===14){
+     f.innerHTML='<b>$1,000,000!</b> You completed the HSC Millionaire ladder.<br><br>'+current.e+
+       '<br><br><span class="source"><b>Source:</b> '+current.source+'</span>'+
+       '<br><br><button onclick="startGame()">Play Again</button>';
+   } else {
+     f.innerHTML='<b>Correct — '+money[level]+'.</b><br><br>'+current.e+
+       '<br><br><span class="source"><b>Source:</b> '+current.source+'</span>'+
+       '<br><br><button onclick="nextQuestion()">Continue</button>';
+   }
+ } else {
+   let guaranteed = level>=10 ? "$32,000" : level>=5 ? "$1,000" : "$0";
+   f.innerHTML='<b>Incorrect.</b> The correct answer was <b>'+String.fromCharCode(65+current.a)+': '+current.o[current.a]+'</b>.'+
+     '<br><br>'+current.e+
+     '<br><br><span class="source"><b>Source:</b> '+current.source+'</span>'+
+     '<br><br>You leave with <b>'+guaranteed+'</b>.'+
+     '<br><br><button onclick="startGame()">Play Again</button>';
+ }
+}
+
+function nextQuestion(){ level++; showQuestion(); }
+
+function useFifty(){
+ if(used.fifty||locked)return;
+ used.fifty=true; document.getElementById('fifty').classList.add('used');
+ let wrong=[0,1,2,3].filter(i=>i!==current.a);
+ shuffle(wrong).slice(0,2).forEach(i=>{
+   document.querySelector('.answerbtn[data-index="'+i+'"]').classList.add('removed');
+ });
+}
+
+function askClass(){
+ if(used.classLife||locked)return;
+ used.classLife=true; document.getElementById('classLife').classList.add('used');
+ let vals=[8,10,12,14], correct=55+Math.floor(Math.random()*21);
+ let remaining=100-correct, wrong=[0,1,2,3].filter(i=>i!==current.a);
+ let poll=[0,0,0,0]; poll[current.a]=correct;
+ let r1=Math.floor(remaining*.45), r2=Math.floor(remaining*.35);
+ poll[wrong[0]]=r1; poll[wrong[1]]=r2; poll[wrong[2]]=remaining-r1-r2;
+ alert('Class poll:\\n'+poll.map((p,i)=>String.fromCharCode(65+i)+': '+p+'%').join('\\n'));
+}
+
+function askForsyth(){
+ if(used.forsythLife||locked)return;
+ used.forsythLife=true; document.getElementById('forsythLife').classList.add('used');
+ let pick;
+ if(Math.random()<0.8) pick=current.a;
+ else pick=shuffle([0,1,2,3].filter(i=>i!==current.a))[0];
+ alert('Mr Forsyth says: “I’m going with '+String.fromCharCode(65+pick)+'. Don’t blame me if I’m wrong.”');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAC Bingo</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">HSC Society &amp; Culture Revision</a><nav>
+<a href="games.html">Games</a>
+<a href="past-questions.html">Past Questions</a>
+<a href="how-to.html">How to Answer</a>
+</nav></div></header>
+
+<main class="wrap">
+<span class="tag">SOLO REVISION</span>
+<h1>SAC Bingo</h1>
+<p class="lead">A quick solo revision game for concepts, research methods and case-study evidence.</p>
+
+<section class="panel">
+<h2>How to Play</h2>
+<ol>
+<li>Click <b>New Game</b> to generate a random 3×3 card.</li>
+<li>Click <b>Reveal Clue</b> to see a definition, example or description.</li>
+<li>Decide which square matches the clue.</li>
+<li>Click the matching square. If you are correct, it will be marked.</li>
+<li>Complete <b>three correct squares in a row</b> — across, down or diagonally — to get BINGO.</li>
+</ol>
+<p class="source">A clue may not match every square on your card, so read carefully before choosing.</p>
+</section>
+
+<div class="gamebar">
+<button id="new">New Game</button>
+<button id="clue">Reveal Clue</button>
+<span><b>Correct:</b> <span id="score">0</span></span>
+</div>
+
+<div id="cluetxt" class="notice">Click New Game to begin.</div>
+<div id="feedback"></div>
+<div id="board" class="bingo"></div>
+<div id="win" class="notice" style="display:none"></div>
+</main>
+
+<script>
+let all=[], card=[], current=null, score=0, cluePool=[];
+
+fetch('data/easy-games.json')
+  .then(r=>r.json())
+  .then(d=>{
+    all=d.bingo;
+    newGame();
+  });
+
+function shuffle(a){
+  return [...a].sort(()=>Math.random()-.5);
+}
+
+function newGame(){
+  card=shuffle(all).slice(0,9).map(x=>({...x,marked:false}));
+  cluePool=shuffle(all);
+  current=null;
+  score=0;
+  document.getElementById('score').textContent='0';
+  document.getElementById('feedback').textContent='';
+  document.getElementById('win').style.display='none';
+  document.getElementById('cluetxt').textContent='Card ready. Click Reveal Clue.';
+  render();
+}
+
+function render(){
+  const board=document.getElementById('board');
+  board.innerHTML='';
+  card.forEach((x,i)=>{
+    const btn=document.createElement('button');
+    btn.className='bingoCell'+(x.marked?' used':'');
+    btn.textContent=x.term;
+    btn.onclick=()=>choose(i);
+    board.appendChild(btn);
+  });
+}
+
+function nextClue(){
+  if(!cluePool.length) cluePool=shuffle(all);
+
+  current=cluePool.pop();
+  document.getElementById('feedback').textContent='';
+  document.getElementById('cluetxt').innerHTML='<b>Clue:</b> '+current.clue;
+}
+
+function choose(i){
+  if(!current){
+    document.getElementById('feedback').textContent='Reveal a clue first.';
+    return;
+  }
+
+  const selected=card[i];
+
+  if(selected.term===current.term){
+    if(!selected.marked){
+      selected.marked=true;
+      score++;
+      document.getElementById('score').textContent=score;
+    }
+    document.getElementById('feedback').innerHTML='<b>Correct.</b> '+current.term+' matches the clue.';
+    render();
+    if(checkWin()){
+      const win=document.getElementById('win');
+      win.style.display='block';
+      win.innerHTML='<b>BINGO!</b> You completed three correct squares in a row.';
+    }
+    current=null;
+  } else {
+    document.getElementById('feedback').innerHTML='<b>Not quite.</b> Try another square.';
+  }
+}
+
+function checkWin(){
+  const lines=[
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  return lines.some(line=>line.every(i=>card[i].marked));
+}
+
+document.getElementById('new').onclick=newGame;
+document.getElementById('clue').onclick=nextClue;
+</script>
+</body>
+</html>

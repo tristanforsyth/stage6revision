@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Am I?</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">HSC Society &amp; Culture Revision</a>
+    <nav>
+      <a href="games.html">Games</a>
+      <a href="past-questions.html">Past Questions</a>
+      <a href="how-to.html">How to Answer</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<span class="tag">SOLO REVISION</span>
+<h1>Who Am I?</h1>
+<p class="lead">Identify the concept, research method or case-study example from progressively easier clues. The earlier you solve it, the more points you score.</p>
+
+<section class="panel">
+<h2>How to Play</h2>
+<ol>
+<li>Start with <b>10 points</b>.</li>
+<li>Reveal one clue at a time.</li>
+<li>After each clue, type your guess and click <b>Check Guess</b>.</li>
+<li>Each extra clue reduces the available score by <b>2 points</b>.</li>
+<li>A wrong guess costs <b>1 point</b>.</li>
+<li>Correctly identify the answer before the points run out.</li>
+</ol>
+</section>
+
+<div class="gamebar">
+  <b>Available points: <span id="points">10</span></b>
+  <b>Total score: <span id="total">0</span></b>
+  <b>Round: <span id="round">1</span></b>
+</div>
+
+<section class="panel">
+  <div id="clues"></div>
+  <button id="reveal">Reveal Clue</button>
+
+  <div class="guessbox">
+    <input id="guess" type="text" placeholder="Type your answer">
+    <button id="check">Check Guess</button>
+  </div>
+
+  <div id="feedback" class="notice" style="display:none"></div>
+  <button id="next" style="display:none">Next Round</button>
+</section>
+</main>
+
+<script>
+let qs=[], current=null, clueIndex=0, points=10, total=0, round=1, finished=false;
+
+fetch('data/easy-games.json')
+  .then(r=>r.json())
+  .then(d=>{
+    qs=d.whoami;
+    startRound();
+  });
+
+function normalise(s){
+  return s.toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+
+function startRound(){
+  current=qs[Math.floor(Math.random()*qs.length)];
+  clueIndex=0;
+  points=10;
+  finished=false;
+  document.getElementById('points').textContent=points;
+  document.getElementById('round').textContent=round;
+  document.getElementById('clues').innerHTML='<p><b>No clues revealed yet.</b></p>';
+  document.getElementById('guess').value='';
+  document.getElementById('feedback').style.display='none';
+  document.getElementById('next').style.display='none';
+  document.getElementById('reveal').disabled=false;
+  document.getElementById('check').disabled=false;
+}
+
+function revealClue(){
+  if(finished) return;
+  if(clueIndex >= current.clues.length) return;
+
+  if(clueIndex > 0){
+    points=Math.max(0,points-2);
+    document.getElementById('points').textContent=points;
+  }
+
+  const box=document.getElementById('clues');
+  if(clueIndex===0) box.innerHTML='';
+  box.innerHTML += `<p><b>Clue ${clueIndex+1}:</b> ${current.clues[clueIndex]}</p>`;
+  clueIndex++;
+
+  if(clueIndex >= current.clues.length){
+    document.getElementById('reveal').disabled=true;
+  }
+}
+
+function checkGuess(){
+  if(finished) return;
+  const guess=document.getElementById('guess').value.trim();
+  if(!guess){
+    showFeedback('Type a guess first.');
+    return;
+  }
+
+  if(normalise(guess)===normalise(current.answer)){
+    total += points;
+    document.getElementById('total').textContent=total;
+    showFeedback(`<b>Correct — ${current.answer}.</b> You scored ${points} points this round.`);
+    finishRound();
+  } else {
+    points=Math.max(0,points-1);
+    document.getElementById('points').textContent=points;
+
+    if(points===0){
+      showFeedback(`<b>Out of points.</b> The answer was <b>${current.answer}</b>.`);
+      finishRound();
+    } else {
+      showFeedback(`<b>Not quite.</b> You lose 1 point. Reveal another clue or try again.`);
+    }
+  }
+}
+
+function finishRound(){
+  finished=true;
+  document.getElementById('reveal').disabled=true;
+  document.getElementById('check').disabled=true;
+  document.getElementById('next').style.display='inline-block';
+}
+
+function showFeedback(html){
+  const f=document.getElementById('feedback');
+  f.style.display='block';
+  f.innerHTML=html;
+}
+
+document.getElementById('reveal').onclick=revealClue;
+document.getElementById('check').onclick=checkGuess;
+document.getElementById('guess').addEventListener('keydown',e=>{
+  if(e.key==='Enter') checkGuess();
+});
+document.getElementById('next').onclick=()=>{
+  round++;
+  startRound();
+};
+</script>
+</body>
+</html>

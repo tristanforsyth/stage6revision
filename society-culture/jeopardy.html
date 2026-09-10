@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HSC Jeopardy — Team Challenge | Society & Culture Revision</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.jeopardy-wrap{max-width:1200px;margin:0 auto;padding:20px}
+.j-title{text-align:center;margin-bottom:8px}
+.j-sub{text-align:center;margin-bottom:20px}
+.scorebar{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin:16px 0}
+.scorebox{background:#fff;border:1px solid #ddd;border-radius:12px;padding:10px 16px;font-weight:700}
+.board{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;background:#111;padding:7px;border-radius:12px}
+.cat{background:#172f78;color:#fff;text-align:center;font-weight:800;padding:14px 8px;min-height:68px;display:flex;align-items:center;justify-content:center;text-transform:uppercase;font-size:.92rem}
+.clue{background:#123da5;color:#ffd84d;border:0;min-height:88px;font-size:1.55rem;font-weight:900;cursor:pointer;border-radius:0}
+.clue:hover{filter:brightness(1.15)}
+.clue.used{background:#25345c;color:#64708e;cursor:default}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
+.modal.show{display:flex}
+.card{background:#102d82;color:white;width:min(760px,95vw);border-radius:18px;padding:30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.card h2{color:#ffd84d;margin-top:0}
+.card .question{font-size:1.35rem;line-height:1.45;margin:24px 0}
+.card .answer{display:none;background:#fff;color:#111;border-radius:12px;padding:18px;margin:18px 0;text-align:left}
+.card button{margin:6px}
+.source{font-size:.85rem;opacity:.8}
+@media(max-width:760px){
+ .board{grid-template-columns:repeat(5,minmax(115px,1fr));overflow-x:auto}
+ .cat{font-size:.75rem}
+ .clue{min-height:72px;font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+<div class="wrap nav">
+<a href="index.html" class="brand">HSC Society & Culture</a>
+<nav><a href="games.html">Games</a><a href="multiple-choice.html">Multiple Choice</a><a href="past-questions.html">Past HSC Questions</a></nav>
+</div>
+</header>
+
+<main class="jeopardy-wrap">
+<h1 class="j-title">HSC Jeopardy — Team Challenge</h1>
+<p class="j-sub"><b>TEAM GAME</b> — Split into teams and take turns choosing a category and value. Discuss your answer before revealing the correct response. Correct answers add the clue value; incorrect answers subtract it.</p>
+
+<div class="scorebar">
+ <div class="scorebox">Team Score: <span id="score">0</span></div>
+ <button onclick="changeScore(100)">+100</button>
+ <button onclick="changeScore(-100)">−100</button>
+ <button onclick="resetGame()">Reset Board</button>
+</div>
+
+<div class="board" id="board"></div>
+<p class="source">Questions are adapted from official NESA HSC Society & Culture multiple-choice papers and use the corresponding official answer keys.</p>
+</main>
+
+<div class="modal" id="modal">
+ <div class="card">
+   <h2 id="mcat"></h2>
+   <div class="question" id="mquestion"></div>
+   <button id="reveal" onclick="revealAnswer()">Reveal Answer</button>
+   <div class="answer" id="manswer"></div>
+   <div id="markbuttons" style="display:none">
+      <button onclick="markAnswer(true)">Correct</button>
+      <button onclick="markAnswer(false)">Incorrect</button>
+   </div>
+   <button onclick="closeModal()">Close</button>
+ </div>
+</div>
+
+<script>
+const categories = [
+ {name:"Concepts & Levels", match:q=>/micro|meso|macro|identity|culture|authority|power|empowerment/i.test(q.q)},
+ {name:"Continuity & Change", match:q=>/change|continuity|modernisation|westernisation|globalisation|evolutionary|transformative/i.test(q.q)},
+ {name:"Research Methods", match:q=>/research|questionnaire|interview|observation|content analysis|statistical|focus group|participant|ethical|confidential|source/i.test(q.q)},
+ {name:"Social Theory", match:q=>/theory|functionalist|conflict|interactionist|evolutionary/i.test(q.q)},
+ {name:"Society in Action", match:q=>/sustainability|technology|gender|belief|tradition|community|citizen|protest|work|environment/i.test(q.q)}
+];
+const values=[100,200,300,400,500];
+let bank=[], boardQuestions=[], current=null, currentButton=null, currentValue=0, score=0;
+
+fetch('data/questions.json').then(r=>r.json()).then(d=>{
+ bank=d;
+ buildBoard();
+});
+
+function shuffle(a){
+ a=[...a];
+ for(let i=a.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+
+function buildBoard(){
+ const used=new Set();
+ boardQuestions=[];
+ categories.forEach((cat,ci)=>{
+   let pool=bank.filter(q=>cat.match(q) && !used.has(q.q));
+   pool=shuffle(pool).sort((a,b)=>(a.level||3)-(b.level||3));
+   let picks=[];
+   for(let vi=0;vi<5;vi++){
+     let target=vi+1;
+     let candidates=pool.filter(q=>!used.has(q.q));
+     if(!candidates.length) candidates=bank.filter(q=>!used.has(q.q));
+     candidates.sort((a,b)=>Math.abs((a.level||3)-target)-Math.abs((b.level||3)-target));
+     let q=candidates[0];
+     if(q){picks.push(q);used.add(q.q);}
+   }
+   boardQuestions.push(picks);
+ });
+ renderBoard();
+}
+
+function renderBoard(){
+ const b=document.getElementById('board');
+ b.innerHTML='';
+ categories.forEach(c=>{
+   const h=document.createElement('div');
+   h.className='cat'; h.textContent=c.name; b.appendChild(h);
+ });
+ values.forEach((v,vi)=>{
+   categories.forEach((c,ci)=>{
+     const btn=document.createElement('button');
+     btn.className='clue';
+     btn.textContent='$'+v;
+     btn.onclick=()=>openClue(ci,vi,btn,v);
+     b.appendChild(btn);
+   });
+ });
+}
+
+function openClue(ci,vi,btn,v){
+ if(btn.classList.contains('used')) return;
+ current=boardQuestions[ci][vi];
+ currentButton=btn;
+ currentValue=v;
+ document.getElementById('mcat').textContent=categories[ci].name+' — $'+v;
+ document.getElementById('mquestion').innerHTML =
+   '<div>'+current.q+'</div>' +
+   '<div style="margin-top:18px;text-align:left;display:inline-block">' +
+   current.o.map((opt,i)=>'<div style="margin:7px 0"><b>'+String.fromCharCode(65+i)+'.</b> '+opt+'</div>').join('') +
+   '</div>';
+ document.getElementById('manswer').style.display='none';
+ document.getElementById('manswer').innerHTML='';
+ document.getElementById('reveal').style.display='inline-block';
+ document.getElementById('markbuttons').style.display='none';
+ document.getElementById('modal').classList.add('show');
+}
+
+function revealAnswer(){
+ let correct=current.o[current.a];
+ document.getElementById('manswer').innerHTML='<b>Answer:</b> '+correct+'<br><br>'+current.e+'<br><br><span class="source"><b>Source:</b> '+current.source+'</span>';
+ document.getElementById('manswer').style.display='block';
+ document.getElementById('reveal').style.display='none';
+ document.getElementById('markbuttons').style.display='block';
+}
+
+function markAnswer(ok){
+ score += ok ? currentValue : -currentValue;
+ document.getElementById('score').textContent=score;
+ currentButton.classList.add('used');
+ currentButton.textContent='—';
+ closeModal();
+}
+
+function changeScore(n){
+ score+=n;
+ document.getElementById('score').textContent=score;
+}
+
+function closeModal(){
+ document.getElementById('modal').classList.remove('show');
+}
+
+function resetGame(){
+ score=0;
+ document.getElementById('score').textContent='0';
+ buildBoard();
+}
+</script>
+</body>
+</html>

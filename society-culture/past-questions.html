@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Past HSC Questions</title><link rel="stylesheet" href="assets/style.css"></head><body><nav><div class="wrap"><a class="brand" href="index.html">HSC SOCIETY & CULTURE</a><a href="multiple-choice.html">Multiple Choice</a><a href="games.html">Games</a><a href="past-questions.html">Past Questions</a><a href="how-to.html">How to Answer</a><a href="../index.html">HSC Hub</a></div></nav><header class="hero"><div class="wrap"><div class="eyebrow">OFFICIAL EXAM PRACTICE</div><h1>Past HSC Questions</h1><p class="lead">Verified NESA questions and guidance belong here.</p></div></header><main class="wrap">
+<p class="lead">Use this page to practise HSC Society & Culture questions by <b>syllabus area</b>, not just by year. Choose the part of the course you need to revise, then open a question to see what knowledge, concepts and case-study evidence you should bring to it.</p>
+
+<div class="notice"><b>How to use this page:</b> 1. Pick a unit. 2. Find the syllabus area you need. 3. Attempt the question without notes. 4. Open the guidance only after planning. 5. Check the original NESA paper/marking material when completing full timed practice.</div>
+
+<section class="panel">
+<h2>Your HSC Course</h2>
+<div class="cards">
+<a class="card" href="#continuity-change"><h3>Continuity & Change</h3><p><b>Case study:</b> South Korea</p><p>Research · theories · modernisation · westernisation · globalisation · resistance · micro/meso/macro · future directions</p></a>
+<a class="card" href="#popular-culture"><h3>Popular Culture</h3><p><b>Case study:</b> Teen Film</p><p>Nature · development · access · consumption · control · technology · identity · gender · continuity/change · future directions</p></a>
+<a class="card" href="#beliefs"><h3>Beliefs & Ideologies</h3><p><b>Case study:</b> Islam</p><p>Meaning · identity · belonging · expression · rituals/symbols · authority · secularisation · continuity/change · contemporary society</p></a>
+</div>
+</section>
+
+<div id="pastBanks"></div>
+
+<section class="panel">
+<h2>Official NESA Papers & Marking Material</h2>
+<p>For full timed practice, use the complete official exam paper and its marking guidelines. NESA marking guidelines guide markers; sample answers are not intended to be complete or exemplary answers.</p>
+<p><a class="btn" href="https://www.nsw.gov.au/education-and-training/nesa/curriculum/hsc-exam-papers/society-and-culture" target="_blank" rel="noopener">Open NESA Society & Culture exam archive</a></p>
+</section>
+</main>
+<script>
+const bankInfo={
+ 'continuity-change':{title:'Social & Cultural Continuity and Change',caseStudy:'South Korea'},
+ 'popular-culture':{title:'Popular Culture',caseStudy:'Teen Film'},
+ 'beliefs':{title:'Belief Systems & Ideologies',caseStudy:'Islam'}
+};
+fetch('data/topic-practice.json').then(r=>r.json()).then(data=>{
+ const root=document.getElementById('pastBanks');
+ Object.entries(bankInfo).forEach(([key,info])=>{
+  const sec=document.createElement('section'); sec.className='panel'; sec.id=key;
+  let topics={}; data[key].forEach(x=>(topics[x.topic]??=[]).push(x));
+  sec.innerHTML=`<h2>${info.title}</h2><p><b>Your evidence:</b> ${info.caseStudy}</p>`;
+  Object.entries(topics).forEach(([topic,qs])=>{
+    const h=document.createElement('h3'); h.textContent=topic; sec.appendChild(h);
+    qs.forEach(x=>{
+      const d=document.createElement('details');
+      d.innerHTML=`<summary><b>${x.year} HSC · ${x.marks} marks</b> — ${x.q}</summary>
+      <p><b>Syllabus connection:</b> ${topic}</p>
+      <p><b>Apply it to your course:</b> ${x.apply}</p>
+      <p><b>What stronger responses do:</b> ${x.nesa}</p>
+      <p class="source">Source: NESA Society & Culture HSC exam/marking feedback, ${x.year}. Wording may be shortened/adapted for revision.</p>`;
+      sec.appendChild(d);
+    });
+  });
+  root.appendChild(sec);
+ });
+});
+</script><footer><div class="wrap">HSC Society & Culture Revision Hub · Year 12</div></footer></body></html>

@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Multiple Choice</title><link rel="stylesheet" href="assets/style.css"></head><body><nav><div class="wrap"><a class="brand" href="index.html">HSC SOCIETY & CULTURE</a><a href="multiple-choice.html">Multiple Choice</a><a href="games.html">Games</a><a href="past-questions.html">Past Questions</a><a href="how-to.html">How to Answer</a><a href="../index.html">HSC Hub</a></div></nav><header class="hero"><div class="wrap"><div class="eyebrow">RANDOM REVISION</div><h1>Multiple Choice</h1><p class="lead">Test knowledge across all three course areas and the toolkit.</p></div></header><main class="wrap"><div class="panel"><div class="chips"><span class="chip">Score: <span id="score">0 / 0</span></span></div><h2 id="q">Loading...</h2><div class="answers" id="answers"></div><div id="feedback" class="feedback"></div></div><p class="source">Original revision questions grounded in the taught course materials. Official NESA questions will be handled separately.</p><script>
+let bank=[],queue=[],current,score=0,done=0,lastQuestion=null;
+
+fetch('data/questions.json')
+  .then(r=>r.json())
+  .then(d=>{
+    bank=d;
+    reshuffle();
+    next();
+  });
+
+function reshuffle(){
+  queue=[...bank];
+
+  for(let i=queue.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [queue[i],queue[j]]=[queue[j],queue[i]];
+  }
+
+  // Prevent the last question of one cycle immediately
+  // becoming the first question of the next cycle.
+  if(lastQuestion && queue.length>1 && queue[0].q===lastQuestion.q){
+    [queue[0],queue[1]]=[queue[1],queue[0]];
+  }
+}
+
+function next(){
+  if(queue.length===0) reshuffle();
+
+  current=queue.shift();
+  lastQuestion=current;
+
+  q.textContent=current.q;
+  answers.innerHTML='';
+
+  current.o.forEach((x,i)=>{
+    let b=document.createElement('button');
+    b.textContent=String.fromCharCode(65+i)+'. '+x;
+    b.onclick=()=>ans(i);
+    answers.appendChild(b);
+  });
+
+  feedback.innerHTML='';
+}
+
+function ans(i){
+  done++;
+  if(i===current.a) score++;
+
+  feedback.innerHTML=
+    (i===current.a
+      ? '<b>Correct.</b> '
+      : '<b>Not quite.</b> Correct: <b>'+current.o[current.a]+'</b>. ')
+    + current.e
+    + '<br><br><span class="source"><b>Source:</b> '+current.source+'</span>'
+    + '<br><br><button onclick="next()">Next question</button>';
+
+  document.getElementById('score').textContent=score+' / '+done;
+}
+</script></main><footer><div class="wrap">HSC Society & Culture Revision Hub · Year 12</div></footer></body></html>
