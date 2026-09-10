@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HSC Revision Hub</title>
+  <style>
+    :root{
+      --ink:#11171d;
+      --paper:#f2eee5;
+      --accent:#b62938;
+      --muted:#a9b0b6;
+      --line:rgba(255,255,255,.16);
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+
+    body{
+      background:var(--ink);
+      color:#fff;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.18;
+      background:
+        linear-gradient(var(--line) 1px,transparent 1px),
+        linear-gradient(90deg,var(--line) 1px,transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(to bottom,black,transparent 80%);
+    }
+
+    .shell{
+      width:min(1240px,calc(100% - 48px));
+      margin:auto;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:28px 0;
+      border-bottom:1px solid var(--line);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.78rem;
+    }
+
+    .brand{font-weight:800}
+
+    .year{
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    main{
+      flex:1;
+      display:grid;
+      grid-template-columns:minmax(0,1.55fr) minmax(260px,.65fr);
+      gap:64px;
+      align-items:center;
+      padding:72px 0 82px;
+    }
+
+    .eyebrow{
+      color:#e1aab1;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(4.4rem,11vw,9.5rem);
+      line-height:.82;
+      letter-spacing:-.07em;
+      max-width:900px;
+    }
+
+    h1 span{
+      display:block;
+      color:var(--paper);
+    }
+
+    .intro{
+      max-width:700px;
+      margin:34px 0 0;
+      font-size:clamp(1.05rem,1.8vw,1.35rem);
+      line-height:1.55;
+      color:#c9ced2;
+    }
+
+    .launch{
+      border-left:1px solid var(--line);
+      padding-left:36px;
+    }
+
+    .launch-label{
+      font-size:.72rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:18px;
+      font-weight:800;
+    }
+
+    .subject{
+      margin:0 0 12px;
+      font-size:2rem;
+      line-height:1.05;
+    }
+
+    .subject-copy{
+      color:#b9c0c5;
+      line-height:1.55;
+      margin:0 0 26px;
+    }
+
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:16px;
+      text-decoration:none;
+      color:#fff;
+      background:var(--accent);
+      padding:17px 20px;
+      font-weight:800;
+      border-radius:4px;
+      transition:transform .15s ease,background .15s ease;
+    }
+
+    .cta:hover{
+      transform:translateY(-2px);
+      background:#c43243;
+    }
+
+    .arrow{
+      font-size:1.35rem;
+      line-height:1;
+    }
+
+    .topics{
+      margin-top:28px;
+      padding-top:24px;
+      border-top:1px solid var(--line);
+      color:#969fa6;
+      font-size:.86rem;
+      line-height:1.8;
+    }
+
+    footer{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding:20px 0 28px;
+      border-top:1px solid var(--line);
+      color:#7f8991;
+      font-size:.76rem;
+    }
+
+    .accent-bar{
+      position:absolute;
+      top:0;
+      right:8%;
+      width:12px;
+      height:150px;
+      background:var(--accent);
+    }
+
+    @media(max-width:800px){
+      .shell{width:min(100% - 30px,1240px)}
+      main{
+        grid-template-columns:1fr;
+        gap:46px;
+        align-items:start;
+        padding:56px 0 64px;
+      }
+      .launch{
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding:32px 0 0;
+      }
+      h1{font-size:clamp(4rem,20vw,7rem)}
+      footer{flex-direction:column}
+      .accent-bar{right:6%;height:105px;width:8px}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="accent-bar"></div>
+
+    <header>
+      <div class="brand">HSC Revision Hub</div>
+      </header>
+
+    <main>
+      <section>
+        <div class="eyebrow">Study smarter. Revise with purpose.</div>
+        <h1>HSC<span>Revision Hub</span></h1>
+        <p class="intro">
+          A focused revision space for course content, HSC-style practice and interactive study tools.
+          Built for quick access when you need to revise, practise or check what you know.
+        </p>
+      </section>
+
+      <aside class="launch">
+        <div class="launch-label">Available now</div>
+        <h2 class="subject">Society &amp; Culture</h2>
+        <p class="subject-copy">
+          Course revision, past HSC questions, answer support, multiple choice and revision games.
+        </p>
+        <a class="cta" href="society-culture/index.html">
+          Enter Society &amp; Culture
+          <span class="arrow">→</span>
+        </a>
+        <div class="topics">
+          Continuity &amp; Change<br>
+          Popular Culture<br>
+          Belief Systems &amp; Ideologies
+        </div>
+      </aside>
+    </main>
+
+    <footer><span>HSC Revision Hub</span></footer>
+  </div>
+</body>
+</html>
