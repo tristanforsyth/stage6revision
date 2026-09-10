@@ -1,0 +1,492 @@
+{
+  "whoami": [
+    {
+      "answer": "Focus group",
+      "clues": [
+        "I am a research method.",
+        "I collect qualitative data.",
+        "I involve a small group discussing a topic.",
+        "A moderator guides the discussion."
+      ]
+    },
+    {
+      "answer": "Content analysis",
+      "clues": [
+        "I am a research method.",
+        "I examine existing material.",
+        "I can identify patterns and trends.",
+        "I could be used to compare representations in teen films."
+      ]
+    },
+    {
+      "answer": "Globalisation",
+      "clues": [
+        "I am a process of increasing interconnectedness.",
+        "Technology can accelerate me.",
+        "I can spread media and consumer culture across borders.",
+        "I am important when studying change in South Korea."
+      ]
+    },
+    {
+      "answer": "Westernisation",
+      "clues": [
+        "I describe the influence of Western ideas and practices.",
+        "I am not the same as modernisation.",
+        "I can affect cultural continuity.",
+        "I can be investigated in South Korea."
+      ]
+    },
+    {
+      "answer": "Ummah",
+      "clues": [
+        "I relate to the Islam case study.",
+        "I am connected to collective identity and belonging.",
+        "I extend beyond one local community.",
+        "I refer to the worldwide Muslim community."
+      ]
+    },
+    {
+      "answer": "Salah",
+      "clues": [
+        "I relate to Islam.",
+        "I am a ritual practice.",
+        "I reinforce identity and continuity.",
+        "I am the practice of prayer."
+      ]
+    },
+    {
+      "answer": "Candlelight Revolution",
+      "clues": [
+        "I am evidence from South Korea.",
+        "I occurred in 2016\u201317.",
+        "I demonstrate citizen participation, power and authority.",
+        "I involved mass candlelight protests over political leadership and corruption."
+      ]
+    },
+    {
+      "answer": "Teen Film",
+      "clues": [
+        "I am the class Popular Culture case study.",
+        "I developed strongly with post-war youth culture.",
+        "Streaming and globalisation affect my consumption.",
+        "10 Things I Hate About You and Do Revenge are examples used in class."
+      ]
+    }
+  ],
+  "snap": [
+    {
+      "left": "Candlelight Revolution",
+      "right": "Power & authority",
+      "match": true,
+      "why": "The protests provide evidence of citizen participation, political power, authority and social change."
+    },
+    {
+      "left": "Ummah",
+      "right": "Identity & belonging",
+      "match": true,
+      "why": "Ummah can reinforce collective Muslim identity and a sense of belonging."
+    },
+    {
+      "left": "Content analysis",
+      "right": "Research method",
+      "match": true,
+      "why": "Content analysis systematically examines material to identify patterns, themes or trends."
+    },
+    {
+      "left": "Westernisation",
+      "right": "Research method",
+      "match": false,
+      "why": "Westernisation is a process of social and cultural influence, not a research method."
+    },
+    {
+      "left": "Salah",
+      "right": "Ritual",
+      "match": true,
+      "why": "Salah is the Islamic practice of prayer and can reinforce identity and continuity."
+    },
+    {
+      "left": "Streaming",
+      "right": "Popular Culture consumption",
+      "match": true,
+      "why": "Streaming technologies influence access to and consumption of film."
+    },
+    {
+      "left": "Micro level",
+      "right": "National institutions",
+      "match": false,
+      "why": "Micro refers primarily to individuals and close interpersonal relationships; national institutions operate at a broader level."
+    },
+    {
+      "left": "Focus group",
+      "right": "Qualitative research",
+      "match": true,
+      "why": "Focus groups commonly collect qualitative data through guided group discussion."
+    },
+    {
+      "left": "Modernisation",
+      "right": "Same as Westernisation",
+      "match": false,
+      "why": "Modernisation and Westernisation can overlap but are not the same process."
+    },
+    {
+      "left": "Disney ownership",
+      "right": "Power & control",
+      "match": true,
+      "why": "Concentrated media ownership provides evidence for examining power and control in popular culture."
+    }
+  ],
+  "truefalse": [
+    {
+      "q": "Modernisation and Westernisation mean exactly the same thing.",
+      "a": false,
+      "why": "They may interact, but modernisation does not necessarily require adopting Western culture."
+    },
+    {
+      "q": "Micro, meso and macro help examine society at different levels.",
+      "a": true,
+      "why": "They allow analysis from individuals and close relationships through groups/institutions to wider society."
+    },
+    {
+      "q": "A focus group normally involves a moderator guiding discussion.",
+      "a": true,
+      "why": "The moderator helps structure discussion among participants."
+    },
+    {
+      "q": "Ummah can be used as evidence for identity and belonging in Islam.",
+      "a": true,
+      "why": "It refers to the wider Muslim community and supports collective belonging."
+    },
+    {
+      "q": "An example automatically becomes analysis simply because it is specific.",
+      "a": false,
+      "why": "The response must explain what the example demonstrates and connect it to the question."
+    },
+    {
+      "q": "Streaming technologies can influence access to and consumption of Teen Film.",
+      "a": true,
+      "why": "Distribution technologies affect how and where audiences access film."
+    },
+    {
+      "q": "The Candlelight Revolution is useful only as an example of technology.",
+      "a": false,
+      "why": "It is especially useful for power, authority, citizenship, participation, continuity and change."
+    },
+    {
+      "q": "Content analysis can be used to investigate trends in popular culture.",
+      "a": true,
+      "why": "Researchers can code and compare recurring content, representations or themes."
+    },
+    {
+      "q": "A 15-mark Evaluate response should avoid making a judgement until the conclusion.",
+      "a": false,
+      "why": "A judgement should be established and sustained throughout the response."
+    },
+    {
+      "q": "Salah, Ramadan, Hajj and Zakat can provide evidence for continuity in Islam.",
+      "a": true,
+      "why": "Rituals and practices help transmit and maintain beliefs and identity over time."
+    },
+    {
+      "q": "Globalisation can produce both continuity and change.",
+      "a": true,
+      "why": "Global influences can create change while local cultures adapt them and retain existing traditions."
+    },
+    {
+      "q": "Teen Film should be studied only as a collection of film plots.",
+      "a": false,
+      "why": "The depth study examines development, consumption, access, control, identity, technology, globalisation and change."
+    }
+  ],
+  "sentences": [
+    {
+      "stem": "Social and cultural literacy is strengthened when a student can connect\u2026",
+      "opts": [
+        "personal experience, public knowledge and different levels of society",
+        "only personal opinions and anecdotes",
+        "only statistics from secondary sources"
+      ],
+      "a": 0
+    },
+    {
+      "stem": "A strong use of a case-study example should\u2026",
+      "opts": [
+        "name the example and move on",
+        "explain how the evidence answers the question",
+        "replace the need for course concepts"
+      ],
+      "a": 1
+    },
+    {
+      "stem": "Westernisation differs from modernisation because\u2026",
+      "opts": [
+        "all modernisation is Westernisation",
+        "Westernisation specifically concerns Western cultural influence",
+        "Westernisation is a research method"
+      ],
+      "a": 1
+    },
+    {
+      "stem": "Content analysis is useful when a researcher wants to\u2026",
+      "opts": [
+        "identify patterns in existing material",
+        "interview one participant in depth",
+        "observe behaviour without recording patterns"
+      ],
+      "a": 0
+    },
+    {
+      "stem": "The Ummah is useful evidence when discussing\u2026",
+      "opts": [
+        "identity and belonging in Islam",
+        "film distribution",
+        "South Korean political protest"
+      ],
+      "a": 0
+    },
+    {
+      "stem": "Streaming is important to Popular Culture because it can change\u2026",
+      "opts": [
+        "access, consumption and distribution",
+        "the definition of qualitative research",
+        "the meaning of micro level"
+      ],
+      "a": 0
+    },
+    {
+      "stem": "An Analyse question requires a student to\u2026",
+      "opts": [
+        "list everything remembered",
+        "explain relationships between relevant components",
+        "give an unsupported opinion"
+      ],
+      "a": 1
+    },
+    {
+      "stem": "An Evaluate question is strongest when the student\u2026",
+      "opts": [
+        "sustains a supported judgement",
+        "avoids evidence",
+        "defines the topic only"
+      ],
+      "a": 0
+    },
+    {
+      "stem": "The Candlelight Revolution is particularly useful evidence for\u2026",
+      "opts": [
+        "power, authority, participation and change",
+        "Islamic ritual",
+        "Teen Film consumption"
+      ],
+      "a": 0
+    },
+    {
+      "stem": "Micro, meso and macro are useful because they\u2026",
+      "opts": [
+        "show how an issue operates at different levels of society",
+        "rank research methods from best to worst",
+        "measure HSC marks"
+      ],
+      "a": 0
+    }
+  ],
+  "speed": [
+    {
+      "term": "Candlelight Revolution",
+      "cat": "South Korea"
+    },
+    {
+      "term": "Westernisation",
+      "cat": "South Korea"
+    },
+    {
+      "term": "Modernisation",
+      "cat": "South Korea"
+    },
+    {
+      "term": "10 Things I Hate About You",
+      "cat": "Teen Film"
+    },
+    {
+      "term": "Do Revenge",
+      "cat": "Teen Film"
+    },
+    {
+      "term": "Streaming",
+      "cat": "Teen Film"
+    },
+    {
+      "term": "Ummah",
+      "cat": "Islam"
+    },
+    {
+      "term": "Salah",
+      "cat": "Islam"
+    },
+    {
+      "term": "Ramadan",
+      "cat": "Islam"
+    },
+    {
+      "term": "Focus group",
+      "cat": "Research & Concepts"
+    },
+    {
+      "term": "Content analysis",
+      "cat": "Research & Concepts"
+    },
+    {
+      "term": "Micro / Meso / Macro",
+      "cat": "Research & Concepts"
+    }
+  ],
+  "wheel": [
+    {
+      "topic": "South Korea",
+      "q": "Name one example that could demonstrate power or authority.",
+      "a": "The 2016\u201317 Candlelight Revolution is one strong example."
+    },
+    {
+      "topic": "South Korea",
+      "q": "What is the difference between modernisation and Westernisation?",
+      "a": "Modernisation concerns broader social/economic/technological development; Westernisation specifically concerns Western cultural influence."
+    },
+    {
+      "topic": "Teen Film",
+      "q": "Name one technology that has changed access to Teen Film.",
+      "a": "Streaming services are a strong example because they alter distribution and audience access."
+    },
+    {
+      "topic": "Teen Film",
+      "q": "Name one class film that could be used as evidence.",
+      "a": "10 Things I Hate About You or Do Revenge."
+    },
+    {
+      "topic": "Islam",
+      "q": "Give one example of a ritual that can reinforce continuity.",
+      "a": "Examples include Salah, Ramadan, Hajj or Zakat."
+    },
+    {
+      "topic": "Islam",
+      "q": "What does Ummah help explain?",
+      "a": "Collective identity, community and belonging."
+    },
+    {
+      "topic": "Research",
+      "q": "Which method uses a moderated group discussion?",
+      "a": "Focus group."
+    },
+    {
+      "topic": "Research",
+      "q": "Which method could identify patterns in teen-film representations?",
+      "a": "Content analysis."
+    },
+    {
+      "topic": "Concepts",
+      "q": "What are the three levels used to examine society?",
+      "a": "Micro, meso and macro."
+    },
+    {
+      "topic": "HSC Skills",
+      "q": "What must an Evaluate response sustain?",
+      "a": "A supported judgement."
+    }
+  ],
+  "bingo": [
+    {
+      "term": "Globalisation",
+      "clue": "Increasing interconnectedness across societies and cultures."
+    },
+    {
+      "term": "Westernisation",
+      "clue": "Influence or adoption of Western cultural ideas and practices."
+    },
+    {
+      "term": "Modernisation",
+      "clue": "Broad social, economic and technological development or transformation."
+    },
+    {
+      "term": "Power",
+      "clue": "The capacity to influence or control people, resources or decisions."
+    },
+    {
+      "term": "Authority",
+      "clue": "Power regarded as legitimate or accepted."
+    },
+    {
+      "term": "Focus group",
+      "clue": "A moderated group discussion used as a research method."
+    },
+    {
+      "term": "Content analysis",
+      "clue": "Systematic examination of material for patterns or themes."
+    },
+    {
+      "term": "Micro",
+      "clue": "The level focusing on individuals and close interpersonal relationships."
+    },
+    {
+      "term": "Meso",
+      "clue": "The level involving groups, communities and organisations."
+    },
+    {
+      "term": "Macro",
+      "clue": "The broad societal level involving major institutions and structures."
+    },
+    {
+      "term": "Ummah",
+      "clue": "The worldwide Muslim community."
+    },
+    {
+      "term": "Salah",
+      "clue": "Islamic prayer."
+    },
+    {
+      "term": "Ramadan",
+      "clue": "A month associated with fasting and religious observance in Islam."
+    },
+    {
+      "term": "Candlelight Revolution",
+      "clue": "2016\u201317 South Korean protests useful for studying power, authority and change."
+    },
+    {
+      "term": "Streaming",
+      "clue": "A technology that has transformed film access and consumption."
+    },
+    {
+      "term": "Teen Film",
+      "clue": "The class case study for Popular Culture."
+    },
+    {
+      "term": "South Korea",
+      "clue": "The class country study for Continuity and Change."
+    },
+    {
+      "term": "Islam",
+      "clue": "The class case study for Belief Systems and Ideologies."
+    },
+    {
+      "term": "Identity",
+      "clue": "A concept concerned with how people understand who they are."
+    },
+    {
+      "term": "Continuity",
+      "clue": "The persistence or maintenance of social and cultural features over time."
+    },
+    {
+      "term": "Change",
+      "clue": "Alteration in social or cultural patterns over time."
+    },
+    {
+      "term": "Technology",
+      "clue": "A course concept that can influence communication, consumption and social change."
+    },
+    {
+      "term": "Belonging",
+      "clue": "A sense of connection to a group or community."
+    },
+    {
+      "term": "Evaluate",
+      "clue": "A directive requiring a supported judgement."
+    }
+  ]
+}

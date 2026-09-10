@@ -1,0 +1,200 @@
+{
+  "continuity-change": [
+    {
+      "year": "2025",
+      "marks": 4,
+      "topic": "Research",
+      "q": "Explain why social and cultural research is valuable.",
+      "apply": "Use a contemporary example. Link to qualitative/quantitative research and social and cultural literacy.",
+      "nesa": "Better responses identified multiple reasons, explained them in detail and illustrated value through a contemporary example."
+    },
+    {
+      "year": "2025",
+      "marks": 8,
+      "topic": "Globalisation",
+      "q": "Analyse the impact of globalisation on continuity and change in ONE country you have studied.",
+      "apply": "Your country: South Korea. Select specific evidence showing both continuity and change rather than describing globalisation generally.",
+      "nesa": "Build a concept-driven response using relevant course terminology and specific evidence."
+    },
+    {
+      "year": "2024",
+      "marks": 4,
+      "topic": "Research validity",
+      "q": "Explain TWO ways a researcher could improve the validity of research.",
+      "apply": "For each way: identify it, then justify exactly how it improves validity.",
+      "nesa": "Better responses clearly identified two distinct ways and justified how each would improve validity."
+    },
+    {
+      "year": "2024",
+      "marks": 8,
+      "topic": "Modernisation",
+      "q": "Assess the relationship between modernisation and progress.",
+      "apply": "Use South Korea to test the idea that modernisation produces progress. A judgement is required, not a list of changes.",
+      "nesa": "Use evidence to sustain a judgement and connect concepts directly to the question."
+    },
+    {
+      "year": "2023",
+      "marks": 5,
+      "topic": "Westernisation",
+      "q": "Explain the effect of westernisation on cultural continuity.",
+      "apply": "South Korea evidence could include beauty culture, media, consumer culture or other taught examples. Show what changes and what remains.",
+      "nesa": "Better responses clearly explained effects such as cultural loss or diffusion through globalisation, tourism and/or technologies."
+    },
+    {
+      "year": "2023",
+      "marks": 7,
+      "topic": "Resistance to change",
+      "q": "Analyse how resistance to change can influence progress.",
+      "apply": "Use a specific South Korean example and show the relationship between resistance, power/values and the direction of change.",
+      "nesa": "Move beyond defining resistance: explain relationships and consequences."
+    },
+    {
+      "year": "2022",
+      "marks": 3,
+      "topic": "Nature of change",
+      "q": "Distinguish between evolutionary change and transformative change.",
+      "apply": "Focus on rate, direction and scale. A concise comparison is enough.",
+      "nesa": "Better responses clearly and concisely differentiated the two forms using rate, direction and scale."
+    },
+    {
+      "year": "2022",
+      "marks": 9,
+      "topic": "Social theory",
+      "q": "Analyse how a theory of social change can explain continuity and/or change.",
+      "apply": "Choose the theory that best fits your South Korean evidence; do not spend the response merely defining the theory.",
+      "nesa": "Apply the theory to specific evidence and explain how it accounts for continuity/change."
+    },
+    {
+      "year": "2021",
+      "marks": 4,
+      "topic": "Complexity of change",
+      "q": "Explain why social change is a complex process.",
+      "apply": "Consider causes, rates, directions, resistance and micro/meso/macro levels.",
+      "nesa": "Better responses used several dimensions of change, including different levels of society."
+    },
+    {
+      "year": "2019",
+      "marks": 4,
+      "topic": "Social theory",
+      "q": "Explain how ONE theory accounts for social and cultural continuity.",
+      "apply": "Name the theory, then apply it to a specific example rather than writing a generic definition.",
+      "nesa": "Better responses clearly identified a theory, showed how it explains continuity and supported it with relevant specific examples."
+    }
+  ],
+  "popular-culture": [
+    {
+      "year": "2025",
+      "marks": 5,
+      "topic": "Gender & development",
+      "q": "Explain how gender can influence the development of a popular culture.",
+      "apply": "Your popular culture: Teen Film. Use specific films, representations, audiences or industry changes.",
+      "nesa": "Make the relationship between gender and development explicit; examples must do analytical work."
+    },
+    {
+      "year": "2025",
+      "marks": 15,
+      "topic": "Consumption",
+      "q": "Evaluate how ethnicity and location influence the consumption of ONE popular culture.",
+      "apply": "Teen Film. Build a judgement about the significance of both ethnicity and location, supported by specific evidence.",
+      "nesa": "Extended responses should be logical, cohesive, conceptually driven and supported by relevant examples."
+    },
+    {
+      "year": "2024",
+      "marks": 5,
+      "topic": "Technology & expression",
+      "q": "Explain how technology influences the development, access to or consumption of a popular culture.",
+      "apply": "Teen Film evidence may include streaming, social media, recommendation systems, distribution or global audiences.",
+      "nesa": "Use course concepts and show the effect of technology rather than simply listing platforms."
+    },
+    {
+      "year": "2023",
+      "marks": 5,
+      "topic": "Research & trends",
+      "q": "Explain how content analysis could be used to investigate trends in a popular culture.",
+      "apply": "Teen Film: identify what material you would analyse, what patterns you would code, and what the findings could show.",
+      "nesa": "Connect the research method to the specific investigation and the kind of evidence it produces."
+    },
+    {
+      "year": "2023",
+      "marks": 15,
+      "topic": "Development",
+      "q": "Assess the role of conflict and continuity in the development of ONE popular culture.",
+      "apply": "Teen Film. Use a range of examples across time; your judgement should weigh both conflict and continuity.",
+      "nesa": "Sustain the judgement and integrate concepts rather than writing a chronological history."
+    },
+    {
+      "year": "2022",
+      "marks": 5,
+      "topic": "Access & consumption",
+      "q": "Explain ONE factor that influences access to and consumption of a popular culture.",
+      "apply": "Teen Film: select one strong factor such as technology, socioeconomic status, age, gender, ethnicity or location.",
+      "nesa": "Explain the relationship between the factor and patterns of access/consumption."
+    },
+    {
+      "year": "2021",
+      "marks": 15,
+      "topic": "Control & power",
+      "q": "Evaluate the influence of power and authority on the development of ONE popular culture.",
+      "apply": "Teen Film evidence can draw on ownership, studios, streaming services, algorithms, censorship/classification and audiences.",
+      "nesa": "A high-level response needs a sustained judgement and specific evidence, not just examples of powerful organisations."
+    }
+  ],
+  "beliefs": [
+    {
+      "year": "2025",
+      "marks": 5,
+      "topic": "Meaning",
+      "q": "Explain how a belief system or ideology creates meaning for adherents.",
+      "apply": "Your case study: Islam. Use specific beliefs/practices and connect them to identity, values or everyday life.",
+      "nesa": "Explain the relationship between the belief system and the meaning experienced by adherents."
+    },
+    {
+      "year": "2025",
+      "marks": 15,
+      "topic": "Secularisation",
+      "q": "Evaluate the impact of secularisation on the acceptance or rejection of ONE belief system or ideology.",
+      "apply": "Islam. Develop a judgement using evidence about contemporary society, diversity, representation and changing values.",
+      "nesa": "Extended responses should integrate concepts, evidence and a sustained judgement."
+    },
+    {
+      "year": "2024",
+      "marks": 5,
+      "topic": "Communication technologies",
+      "q": "Explain how communication technologies influence the expression of beliefs and ideologies.",
+      "apply": "Islam: consider communication, participation, authority, community and the adaptation of practice.",
+      "nesa": "Show how technology changes expression rather than simply naming technologies."
+    },
+    {
+      "year": "2023",
+      "marks": 5,
+      "topic": "Identity & belonging",
+      "q": "Explain how beliefs and values contribute to identity and belonging.",
+      "apply": "Islam: Ummah, shared values, ritual, language and community provide useful evidence.",
+      "nesa": "Use specific evidence and explicitly link it to identity/belonging."
+    },
+    {
+      "year": "2022",
+      "marks": 5,
+      "topic": "Values & worldviews",
+      "q": "Explain the relationship between values and worldviews in a belief system or ideology.",
+      "apply": "Islam: use a clear example showing how a worldview shapes values and how values influence behaviour.",
+      "nesa": "The relationship between concepts must be explained, not merely defined."
+    },
+    {
+      "year": "2022",
+      "marks": 15,
+      "topic": "Continuity & change",
+      "q": "Assess how rituals, symbols and customs contribute to continuity and change in ONE belief system or ideology.",
+      "apply": "Islam: Salah, Ramadan, Hajj, Zakat, mosque, Qur\u2019an/calligraphy and changing contexts can provide evidence.",
+      "nesa": "Balance continuity and change and sustain a judgement about significance."
+    },
+    {
+      "year": "2021",
+      "marks": 5,
+      "topic": "Authority",
+      "q": "Explain how authority is maintained within a belief system or ideology.",
+      "apply": "Islam: sacred texts, religious leaders, traditions and community expectations.",
+      "nesa": "Explain mechanisms through which authority is accepted and maintained."
+    }
+  ]
+}
